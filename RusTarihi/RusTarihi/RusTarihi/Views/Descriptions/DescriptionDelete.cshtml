@@ -1,0 +1,27 @@
+﻿@model RusTarihi.Models.Descriptions
+
+@{
+    ViewBag.Title = $"{Model.Title}";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center"><b>@ViewBag.Title</b></h1>
+
+<div class="row text-center">
+    <p>
+        <b>@Model.Title</b> adlı açıklamayı silmek istediğine emin misin?
+    </p>
+</div>
+<div>
+    <br />
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color text-center">
+            <input type="submit" value="Sil" class="btn btn-warning" /> |
+            @Html.ActionLink("İptal", "DescriptionList",null,new { @class="btn btn-danger"})
+        </div>
+    }
+</div>

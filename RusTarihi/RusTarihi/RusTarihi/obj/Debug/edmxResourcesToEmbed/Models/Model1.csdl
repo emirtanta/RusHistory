@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RusTarihiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Aralık" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Start" Type="DateTime" Precision="0" />
+    <Property Name="Finish" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Categories" FromRole="Categories" ToRole="Comments" />
+    <NavigationProperty Name="Descriptions" Relationship="Self.FK_Descriptions_Categories" FromRole="Categories" ToRole="Descriptions" />
+    <NavigationProperty Name="Tsars" Relationship="Self.FK_Tsars_Categories" FromRole="Categories" ToRole="Tsars" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsConfirm" Type="Boolean" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="MemberID" Type="Int32" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK_Comments_Categories" FromRole="Comments" ToRole="Categories" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Comments_Members" FromRole="Comments" ToRole="Members" />
+    <Property Name="TsarID" Type="Int32" />
+    <NavigationProperty Name="Tsars" Relationship="RusTarihiDBModel.FK_Comments_Tsars" FromRole="Comments" ToRole="Tsars" />
+  </EntityType>
+  <EntityType Name="Descriptions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TsarID" Type="Int32" />
+    <Property Name="CategoryID" Type="Int32" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK_Descriptions_Categories" FromRole="Descriptions" ToRole="Categories" />
+    <NavigationProperty Name="Tsars" Relationship="Self.FK_Descriptions_Tsars" FromRole="Descriptions" ToRole="Tsars" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberPicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="RolID" Type="Int32" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Members" FromRole="Members" ToRole="Comments" />
+    <NavigationProperty Name="Rols" Relationship="Self.FK_Members_Rols" FromRole="Members" ToRole="Rols" />
+  </EntityType>
+  <EntityType Name="Pictures">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PictureSitePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TsarID" Type="Int32" />
+    <NavigationProperty Name="Tsars" Relationship="Self.FK_Pictures_Tsars" FromRole="Pictures" ToRole="Tsars" />
+  </EntityType>
+  <EntityType Name="Rols">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Seviye" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Members_Rols" FromRole="Rols" ToRole="Members" />
+  </EntityType>
+  <EntityType Name="Sliders">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SliderSitePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Summary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Tsars">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="TsarName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Predecessor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Successor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Reign" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="DiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Age" Type="Byte" />
+    <Property Name="Dynasty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryID" Type="Int32" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK_Tsars_Categories" FromRole="Tsars" ToRole="Categories" />
+    <NavigationProperty Name="Descriptions" Relationship="Self.FK_Descriptions_Tsars" FromRole="Tsars" ToRole="Descriptions" />
+    <NavigationProperty Name="Pictures" Relationship="Self.FK_Pictures_Tsars" FromRole="Tsars" ToRole="Pictures" />
+    <NavigationProperty Name="Comments" Relationship="RusTarihiDBModel.FK_Comments_Tsars" FromRole="Tsars" ToRole="Comments" />
+  </EntityType>
+  <Association Name="FK_Comments_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Descriptions_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="Descriptions" Type="Self.Descriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Descriptions">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tsars_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="Tsars" Type="Self.Tsars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Tsars">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Descriptions_Tsars">
+    <End Role="Tsars" Type="Self.Tsars" Multiplicity="0..1" />
+    <End Role="Descriptions" Type="Self.Descriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tsars">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Descriptions">
+        <PropertyRef Name="TsarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Rols">
+    <End Role="Rols" Type="Self.Rols" Multiplicity="0..1" />
+    <End Role="Members" Type="Self.Members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rols">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="RolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pictures_Tsars">
+    <End Role="Tsars" Type="Self.Tsars" Multiplicity="0..1" />
+    <End Role="Pictures" Type="Self.Pictures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tsars">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Pictures">
+        <PropertyRef Name="TsarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RusTarihiDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Categories" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" />
+    <EntitySet Name="Descriptions" EntityType="Self.Descriptions" />
+    <EntitySet Name="Members" EntityType="Self.Members" />
+    <EntitySet Name="Pictures" EntityType="Self.Pictures" />
+    <EntitySet Name="Rols" EntityType="Self.Rols" />
+    <EntitySet Name="Sliders" EntityType="Self.Sliders" />
+    <EntitySet Name="Tsars" EntityType="Self.Tsars" />
+    <AssociationSet Name="FK_Comments_Categories" Association="Self.FK_Comments_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Descriptions_Categories" Association="Self.FK_Descriptions_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Descriptions" EntitySet="Descriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tsars_Categories" Association="Self.FK_Tsars_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Tsars" EntitySet="Tsars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Members" Association="Self.FK_Comments_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Descriptions_Tsars" Association="Self.FK_Descriptions_Tsars">
+      <End Role="Tsars" EntitySet="Tsars" />
+      <End Role="Descriptions" EntitySet="Descriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Rols" Association="Self.FK_Members_Rols">
+      <End Role="Rols" EntitySet="Rols" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pictures_Tsars" Association="Self.FK_Pictures_Tsars">
+      <End Role="Tsars" EntitySet="Tsars" />
+      <End Role="Pictures" EntitySet="Pictures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Tsars" Association="RusTarihiDBModel.FK_Comments_Tsars">
+      <End Role="Tsars" EntitySet="Tsars" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Comments_Tsars">
+    <End Type="RusTarihiDBModel.Tsars" Role="Tsars" Multiplicity="0..1" />
+    <End Type="RusTarihiDBModel.Comments" Role="Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tsars">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="TsarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

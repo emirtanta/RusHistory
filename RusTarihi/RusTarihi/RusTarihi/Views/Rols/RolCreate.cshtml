@@ -1,0 +1,52 @@
+﻿@model RusTarihi.Models.Account.RolVM
+
+@{
+    ViewBag.Title = "Rol Ekleme Formu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <div class="panel-body">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4 class="text-center">@ViewBag.Title</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @* rol adı bölümü *@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RolName, htmlAttributes: new { @class = "control-label col-lg-2" })
+                        <div class="col-lg-10">
+                            @Html.EditorFor(model => model.RolName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "rol adı" } })
+                            @Html.ValidationMessageFor(model => model.RolName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @* seviye bölümü *@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Seviye, htmlAttributes: new { @class = "control-label col-lg-2" })
+                        <div class="col-lg-10">
+                            @Html.EditorFor(model => model.Seviye, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "rol adı" } })
+                            @Html.ValidationMessageFor(model => model.Seviye, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @* buton bölümü *@
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 text-center">
+                            <input type="submit" value="Ekle" class="btn btn-warning" />
+                            @Html.ActionLink("İptal", "RolList", null, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </section>
+    </div>
+</div>

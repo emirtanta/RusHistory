@@ -1,0 +1,15 @@
+﻿@model IEnumerable<RusTarihi.Models.Categories>
+@using RusTarihi.Helper;
+
+<ul class="cat">
+    @foreach (var item in Model)
+    {
+        @* Seo Url ile oluşturduk *@
+        <li>
+            <i class="icon-angle-right"></i>
+            <a href="/Home/Index/@item.ID">@item.CategoryName</a>
+            <span>(@item.Tsars.Count())</span>
+            @*<a href="/TsarPost/@SeoHelper.ToSeoUrl(item.CategoryName).ToLower()/@item.ID">@item.CategoryName</a><span>(@item.Tsars.Count())</span>*@
+        </li>
+    }
+</ul>

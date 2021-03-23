@@ -1,0 +1,12 @@
+﻿@model IEnumerable<RusTarihi.Models.Descriptions>
+@using RusTarihi.Helper; @* Seo eklemek için kütüphane eklendi *@
+@foreach (var item in Model)
+{
+    <li>
+        @*<img src="@item.ResimURL" class="pull-left" alt="@item.Title" />*@
+        <h6><a href="/TsarPost/@SeoHelper.ToSeoUrl(item.Tsars.TsarName).ToLower()-@item.ID">@item.Tsars.TsarName</a></h6>
+        <p>
+            @Html.Raw(item.Detail.Substring(0, 10));
+        </p>
+    </li>
+}

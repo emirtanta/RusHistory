@@ -1,0 +1,125 @@
+﻿@* Paged List kütüphanesi using ile eklenir *@
+@using PagedList
+@using PagedList.Mvc
+@using RusTarihi.Helper; @* seo için oluşturuldu *@
+
+@model IPagedList<RusTarihi.Models.Categories>
+@{
+    ViewBag.Title = "KategoriCar";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                @foreach (var item in Model)
+                {
+                    <article>
+                        <div class="post-image">
+                            <div class="post-heading">
+                                @* Seo ile çar yazılarına link verdik *@
+                                <h3><a href="/TsarPost/@SeoHelper.ToSeoUrl(item.CategoryName).ToLower()-@item.ID">@item.CategoryName</a></h3>
+                            </div>
+                            <img src="" alt="@item.CategoryName" />
+                        </div>
+                        <p>
+                            Qui ut ceteros comprehensam. Cu eos sale sanctus eligendi, id ius elitr saperet, ocurreret pertinacia pri an. No mei nibh consectetuer, semper laoreet perfecto ad qui, est rebum nulla argumentum ei. Fierent adipisci iracundia est ei, usu timeam persius
+                            ea. Usu ea justo malis, pri quando everti electram ei, ex homero omittam salutatus sed.
+                        </p>
+                        <div class="bottom-article">
+                            <ul class="meta-post">
+                                <li><i class="icon-calendar"></i><a href="#"> Mar 23, 2013</a></li>
+                                <li><i class="icon-user"></i><a href="#"> Admin</a></li>
+                                <li><i class="icon-folder-open"></i><a href="#"> Blog</a></li>
+                                <li><i class="icon-comments"></i><a href="#">4 Comments</a></li>
+                            </ul>
+                            <a href="#" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
+                        </div>
+                    </article>
+                }
+
+
+
+
+
+                @* pagination başlangıç *@
+                <div id="pagination">
+                    @*<span class="all">Page 1 of 3</span>
+                    <span class="current">1</span>
+                    <a href="#" class="inactive">2</a>
+                    <a href="#" class="inactive">3</a>*@
+                    @Html.PagedListPager(Model, Sayfa => Url.Action("KategoriCar", new { Sayfa}),PagedListRenderOptions.Classic)
+                </div>
+                @* pagination bitiş *@
+            </div>
+            <div class="col-lg-4">
+                <aside class="right-sidebar">
+
+                    @* arama bölümü başlangıç *@
+                    <div class="widget">
+                        <form class="form-search">
+                            <input class="form-control" type="text" placeholder="Search..">
+                        </form>
+                    </div>
+                    @* arama bölümü bitiş *@
+
+                    @* Kategoriler Tagı *@
+                    <div class="widget">
+                        <h5 class="widgetheading">Categories</h5>
+                        <ul class="cat">
+                            <li><i class="icon-angle-right"></i><a href="#">Web design</a><span> (20)</span></li>
+                            <li><i class="icon-angle-right"></i><a href="#">Online business</a><span> (11)</span></li>
+                            <li><i class="icon-angle-right"></i><a href="#">Marketing strategy</a><span> (9)</span></li>
+                            <li><i class="icon-angle-right"></i><a href="#">Technology</a><span> (12)</span></li>
+                            <li><i class="icon-angle-right"></i><a href="#">About finance</a><span> (18)</span></li>
+                        </ul>
+                    </div>
+
+                    @* Latest post Tagı *@
+                    <div class="widget">
+                        <h5 class="widgetheading">Latest posts</h5>
+                        <ul class="recent">
+                            <li>
+                                <img src="~/Content/SiteContent/img/dummies/blog/65x65/thumb1.jpg" class="pull-left" alt="" />
+                                <h6><a href="#">Lorem ipsum dolor sit</a></h6>
+                                <p>
+                                    Mazim alienum appellantur eu cu ullum officiis pro pri
+                                </p>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/Content/SiteContent/img/dummies/blog/65x65/thumb2.jpg" class="pull-left" alt="" /></a>
+                                <h6><a href="#">Maiorum ponderum eum</a></h6>
+                                <p>
+                                    Mazim alienum appellantur eu cu ullum officiis pro pri
+                                </p>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/Content/SiteContent/img/dummies/blog/65x65/thumb3.jpg" class="pull-left" alt="" /></a>
+                                <h6><a href="#">Et mei iusto dolorum</a></h6>
+                                <p>
+                                    Mazim alienum appellantur eu cu ullum officiis pro pri
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    @* Popüler Tagı *@
+                    <div class="widget">
+                        <h5 class="widgetheading">Popular tags</h5>
+                        <ul class="tags">
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Trends</a></li>
+                            <li><a href="#">Technology</a></li>
+                            <li><a href="#">Internet</a></li>
+                            <li><a href="#">Tutorial</a></li>
+                            <li><a href="#">Development</a></li>
+                        </ul>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,26 @@
+﻿@model RusTarihi.Models.Comments
+
+@{
+    ViewBag.Title = $"{Model.FullName}";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center"><b>@ViewBag.Title</b></h1>
+
+<div class="row text-center">
+    <p>
+        <b>@Model.FullName</b> adlı yorumu silmek istediğine emin misin?
+    </p>
+</div>
+<div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-warning" /> |
+            @Html.ActionLink("İptal", "CommentList",null,new { @class="btn btn-danger"})
+        </div>
+    }
+</div>

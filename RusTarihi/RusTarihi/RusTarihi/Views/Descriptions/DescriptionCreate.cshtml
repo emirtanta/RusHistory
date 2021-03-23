@@ -1,0 +1,113 @@
+﻿@model RusTarihi.Models.Others.DescriptionVM
+
+@{
+    ViewBag.Title = "Açıklama Ekleme Formu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@* CK Editörün Sayfaya eklenebilmesi için tanımlandı *@
+<script>
+    CKEDITOR.replace("editor");
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4 class="text-center"><b>@ViewBag.Title</b></h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+                        @* TsarID dropdown *@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                @Html.LabelFor(model => model.TsarID, "Çar Seçin", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownList("TsarID", null, "Seçiniz", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TsarID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @* KategoriID dropdown *@
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.CategoryID, "Kategori Seçin", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("CategoryID", null, "Seçim Yapınız", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @* Başlık bölümü *@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-lg-2" })
+                                <div class="col-lg-10">
+                                    @*<textarea name="Title" id="editor">@Model.Title</textarea>*@
+
+                                    @Html.TextAreaFor(model => model.Title, new { htmlAttributes = new { @id = "editor", @class = "form-control" }, @placeholder = "Başlık yazın" })
+
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @* Detay bölümü *@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-lg-2" })
+                                <div class="col-lg-10">
+                                    @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Açıklama Detayı" })
+                                    @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        @* TsarID dropdown *@
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.TsarID, "Çar Seçin", htmlAttributes: new { @class = "control-label col-lg-2" })
+                                <div class="col-lg-12">
+
+                                    @Html.DropDownList("TsarID", null, "Seçiniz", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TsarID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        @* CategoryID dropdown *@
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.CategoryID, "Kategori Seçin", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("CategoryID", null, "Seçim Yapınız", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        @* buton bölümü *@
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10 text-center">
+                                <input type="submit" value="Ekle" class="btn btn-warning" />
+                                @Html.ActionLink("İptal", "DescriptionList", null, new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@model RusTarihi.Models.Pictures
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Pictures</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureSitePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PictureSitePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tsars.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tsars.FullName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,70 @@
+﻿@model RusTarihi.Models.Others.SliderVM
+
+@{
+    ViewBag.Title = "Slider Ekleme Formu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <div class="panel-body">
+
+                @using (Html.BeginForm("SliderCreate", "Sliders", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4 class="text-center"><b style="color:red">@ViewBag.Title</b></h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        @*   Resim  Bölümü *@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SliderSitePath, "Resim Yükleyin", new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                <input type="file" name="SliderSitePath" class="form-control1" accept=".jpg,.jpeg,.png" width="100" height="100" />
+                                @Html.ValidationMessageFor(model => model.SliderSitePath, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @* Title Bölümü *@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Slider için Başlık yazın" })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @* Summary bölümü *@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Özet yazın" })
+                                @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-lg-2" })
+                            <div class="col-lg-10">
+                                @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Açıklama detayı yazın" })
+                                @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @* buton bölümü *@
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10 text-center">
+                                <input type="submit" value="Ekle" class="btn btn-warning" />
+                                @Html.ActionLink("İptal", "SliderList", null, new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+</div>
